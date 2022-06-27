@@ -6,7 +6,7 @@ const categorySchema = new mongoose.Schema({
 })
 
 const Category = mongoose.model('category', categorySchema);
-Category.remove({});
+Category.deleteMany({});
 Category.insertMany([
   { 'id': 1, 'name': 'General' },
   { 'id': 2, 'name': 'Technology' },
