@@ -99,7 +99,7 @@ const deletePostById = async (req, res) => {
     if (!postId) res.send({ status: 404, message: 'No record found for given argument.' }); 
 
     const post = await Post.find({ postId });
-    post.deleteOne({ postId });
+    await Post.deleteOne({ postId });
     res.send({ status: 200, message: post });
     return post; 
   } catch(error) {
