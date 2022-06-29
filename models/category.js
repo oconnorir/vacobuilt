@@ -6,11 +6,17 @@ const categorySchema = new mongoose.Schema({
 })
 
 const Category = mongoose.model('category', categorySchema);
-Category.deleteMany({});
-Category.insertMany([
-  { 'id': 1, 'name': 'General' },
-  { 'id': 2, 'name': 'Technology' },
-  { 'id': 3, 'name': 'Random' },
-])
+
+Category.deleteMany({})
+  .then((result) => {
+    Category.insertMany([
+      { 'id': 1, 'name': 'General' },
+      { 'id': 2, 'name': 'Technology' },
+      { 'id': 3, 'name': 'Random' },
+    ])
+  })
+  .catch((error) => {
+    console.log(error);
+  })
 
 module.exports = { Category };

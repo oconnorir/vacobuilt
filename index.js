@@ -31,7 +31,6 @@ app.delete('/posts', (req, res) => deletePosts(req, res));
 app.delete('/posts/:postId', (req, res) => deletePostById(req, res));
 
 app.use(logs('dev'));
-
 app.listen(3333, () => {
   console.log(`\nWAITING FOR ACTION ON PORT ${3333}.`);
 })
