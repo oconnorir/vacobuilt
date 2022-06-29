@@ -5,7 +5,7 @@ const logs = require('morgan');
 const app = express();
 const bodyParser = require('body-parser');
 const { addUser } = require('./middleware/user');
-const { getAllPosts } = require('./middleware/post');
+const { getAllPosts, addPost } = require('./middleware/post');
 
 mongoose.connect('mongodb://localhost:27017/vacobuilt', { useNewUrlParser: true });
 const dbConnection = mongoose.connection;
@@ -23,9 +23,9 @@ app.get('/posts', (req, res) => getAllPosts(req, res));
 app.get('/posts/:postId', (req, res) => getPostById(req, res));
 app.get('/categories', (req, res) => getCategories(req, res));
 
-app.post('/posts', (req, res) => createPost(req, res));
+app.post('/posts', (req, res) => addPost(req, res));
 
-app.put('/posts/:postId', (req, res) => createPost(req, res));
+app.put('/posts/:postId', (req, res) => addPost(req, res));
 
 app.delete('/posts', (req, res) => deletePosts(req, res));
 app.delete('/posts/:postId', (req, res) => deletePostById(req, res));

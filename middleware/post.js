@@ -48,16 +48,28 @@ const addPost = async (req, res) => {
   try {
     const { title, contents, categoryId } = req.body;
     const date = new Date();
-
-    const post = new Post({
-      postId: uid(42),
-      title,
-      contents,
-      categoryId,
-      createdAt: date
-    })
-    post.save();
-    res.send({ status: 200, message: post });
+    // const post = new Post({
+    //   postId: uid(42),
+    //   title,
+    //   contents,
+    //   categoryId,
+    //   createdAt: date
+    // })
+    // IDEALLY THIS WOULD TEST AN ID ON THE req OBJECT
+    const existingPost = await Post.find({ postId: '839343b35b1c7aa98f465b367ce40caedba400f2ce' });
+    if (existingPost.length) {
+      res.send({ status: 200, message: 'Post already exists.' });
+    } else {
+      const post = new Post({
+        postId: uid(42),
+        title: 'Post Title',
+        contents: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+        categoryId: 1,
+        createdAt: date
+      })
+      post.save();
+      res.send({ status: 200, message: post });
+    }
     return post;
   } catch(error) {
     console.error('ERROR ADDING POST');
